@@ -1,0 +1,94 @@
+Manuel is currently training to master the ancient and sacred art of "Programming Competitions". In 
+order to do this, he has a master called JCB that he admires a lot and that gives him a training plan 
+for preparing himself. JCB training is similar to Mister Miyagi's training to Daniel San which included 
+a set of tasks such as waxing the car or paining the fence. Now JCB has assigned a mission to Manuel that 
+not even Mister Miyagi would have dare to designate. Can Manuel complete this mission on time and with that 
+dominate the next level of the "Programming Competitions"?
+
+The mission starts with an array of N strings and a sacred parchment that Manuel has to find in the deepest
+parts of the Himalayas. Once obtained, Manuel must complete a series of Q tasks written in the sacred parchment.
+Each of these tasks consist of an internal L, R. However, the parchment can only be read by those who are worth it.
+Because of this, the parchment has two values A and B for each task and Manuel must use them to calculate the 
+actual interval L, R in the following way:
+
+ - L = (Last + A - 1) % N + 1
+ - R = (Last + B - 1) % N + 1
+
+In the case that L > R, Manuel can simply swap the values of L and R such that the condition L <= R always holds.
+`Last` represents the answer of the previous task and can be assumed to be 0 before the first task.
+
+Manuel asks his master JCB what is the task that must be completed with this interval. To this JCB answers 
+the following in a very abstract and confusing way:
+
+"The answer of each task can be found in the bottom of your heart. Look inside you and then calculate the number
+of distinct substrings that are in the interval of the array from index L up to R (including both L and R)."
+
+Manuel is still confused because the master talks in a very confusing way so he goes to the Oracle for more information.
+Manuel gives the Oracle some gold coins and the Oracle very kindly shows Manuel a series of examples about the tasks that
+he must complete and an explanation of these.
+
+Input:
+
+The input starts with two values N (1 <= N <= 5000) and Q (1 <= Q <= 10^6) representing the size of the array A and the
+number of tasks that must be completed.
+
+Then you'll recieve N strings A_i that represent the elements of the array. You can assume that the sum of the length of
+all strings A_i is <= 5000 (i.e. sum(i=1,N,|A_i|) <= 5000).
+
+After this, you'll recieve Q lines, each one including two numbers A (1 <= A <= N) and B (1 <= B <= N) that represent
+each of the tasks that Manuel must complete.
+
+Output:
+
+Print Q lines each one with a number V_i representing the answer for the ith task.
+
+Examples:
+
++-----------------------------+
+| Input         | Output      |
++---------------+-------------+
+| 3 6           | 15          |
+| banana        | 15          |
+| ana           | 16          |
+| j             | 5           |
+| 1 1           | 6           |
+| 1 2           | 1           |
+| 1 3           |             |
+| 2 2           |             |
+| 2 3           |             |
+| 3 3           |             |
++-----------------------------+
+
+Explanation:
+
+The substrings of each item in the array are the following:
+
+banana -> {a, an, ana, anan, anana, b, ba, ban, bana, banan, banana, n, na, nan, nana}
+ana    -> {a, an, ana, n, na}
+j      -> {j}
+
+Each task is solved the following way:
+
+A=1, B=1, Last=0 -> L=1, R=1
+subarray -> {banana}
+15
+
+A=1, B=2, Last=15 -> L=1, R=2
+subarray -> {banana, ana} (all substrings of ana are substrings of banana)
+15
+
+A=1, B=3, Last=15 -> L=1, R=3
+subarray -> {banana, ana, j} (all substrings of ana are substrings of banana)
+16
+
+A=1, B=1, Last=16 -> L=2, R=2
+subarray -> {ana}
+5
+
+A=3, B=1, Last=5 -> L=2, R=3
+subarray -> {ana, j}
+6
+
+A=3, B=3, Last=6 -> L=3, R=3
+subarray -> {j}
+1

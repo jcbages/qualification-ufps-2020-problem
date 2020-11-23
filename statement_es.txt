@@ -1,0 +1,91 @@
+Manuel se encontraba entrenando en el antiguo y sagrado arte de las "Maratones de Programacion". Para esto,
+cuenta con un maestro JCB a quien admira mucho y quien le sugiere un plan de entrenamiento con el que puede prepararse.
+Basado en el entrenamiento del señor Miyagi a Daniel San que incluia distintas tareas como encerar el auto o pintar 
+la cerca, JCB ha encomendado una mision que ni el mismo señor Miyagi se hubiera atrevido a asignar. Podrá manuel 
+completarla a tiempo y así dominar el siguiente nivel de las "Maratones de Programacion"?
+
+La mision inicia con un arreglo de N strings y un pergamino sagrado que Manuel debe buscar en lo mas profundo de 
+los Himalayas. Una vez obtenido, Manuel debera completar una serie de Q tareas escritas en el pergamino sagrado. Cada 
+una de estas tareas incluye un intervalo L y R. Sin embargo, el pergamino solo puede ser leido por alguien digno de 
+decifrarlo y es por esto que en vez de tener el intervalo, tiene dos valores A y B con los que Manuel debe calcular 
+el intervalo L, R  de la siguiente forma:
+
+ - L = (Last + A - 1) % N + 1
+ - R = (Last + B - 1) % N + 1
+
+En caso de que L > R, Manuel puede intercambiar los valores L y R para que siempre L <= R. `Last` representa la respuesta a la tarea
+anterior y puede considerarse 0 antes de la primera tarea.
+
+Manuel pregunta a su maestro JCB que debe hacer con este intervalo, a lo que su maestro responde de manera abstracta lo siguiente:
+
+"La respuesta de casa tarea se haya en lo mas profundo de tu corazon, mira dentro de ti y luego calcula el numero de distintos 
+substrings que hay en el intervalo del arreglo desde las posiciones L hasta R (incluyendo tanto L como R)."
+
+Manuel sigue confundido pues el maestro habla de una forma muy extraña, por lo que acude al Oráculo en busca de mas información.
+El Oráculo es gentil y a cambio de unas monedas de oro le muestra a Manuel una serie de ejemplos sobre las tareas que debe 
+realizar y una explicación de los mismos.
+
+Input:
+
+La entrada inicia conn dos valores N (1 <= N <= 5000) y Q (1 <= Q <= 10^6) que representan el tamaño del arreglo A y el 
+numero de tareas a resolver respectivamente.
+
+Luego recibiras N strings A_i que representan los elementos del arreglo. La suma de las lonngitudes de todos los strings es <= 5000 (i.e. sum(i=1,N,|A_i|) <= 5000).
+
+Despues de esto, recibiras Q lineas, cada una incluira dos numeros A (1 <= A <= N) y B (1 <= B <= N) que representan
+cada una de las tareas que Manuel debe completar.
+
+Output:
+
+Imprime Q lineas cada una con un entero V_i que representa la respuesta para la i-esima tarea.
+
+Ejemplos:
+
++-----------------------------+
+| Input         | Output      |
++---------------+-------------+
+| 3 6           | 15          |
+| banana        | 15          |
+| ana           | 16          |
+| j             | 5           |
+| 1 1           | 6           |
+| 1 2           | 1           |
+| 1 3           |             |
+| 2 2           |             |
+| 2 3           |             |
+| 3 3           |             |
++-----------------------------+
+
+Explicacion:
+
+Los substrings de cada elemento son los siguientes:
+
+banana -> {a, an, ana, anan, anana, b, ba, ban, bana, banan, banana, n, na, nan, nana}
+ana    -> {a, an, ana, n, na}
+j      -> {j}
+
+Cada query se resuelve de la siguiente manera:
+
+A=1, B=1, Last=0 -> L=1, R=1
+subarray -> {banana}
+15
+
+A=1, B=2, Last=15 -> L=1, R=2
+subarray -> {banana, ana} (todos los substrings de ana aparecen en banana)
+15
+
+A=1, B=3, Last=15 -> L=1, R=3
+subarray -> {banana, ana, j} (todos los substrings de ana aparecen en banana)
+16
+
+A=1, B=1, Last=16 -> L=2, R=2
+subarray -> {ana}
+5
+
+A=3, B=1, Last=5 -> L=2, R=3
+subarray -> {ana, j}
+6
+
+A=3, B=3, Last=6 -> L=3, R=3
+subarray -> {j}
+1
