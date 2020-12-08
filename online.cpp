@@ -73,27 +73,30 @@ int main() {
         cin >> l >> r;
 
         // we need to fetch and A, B such that:
-        // l-1 = (A+lst-1)%n
-        // r-1 = (B+lst-1)%n
+        // l = (A+lst-1)%n+1
+        // r = (B+lst-1)%n+1
         // Lets try some A=1, B=1 and calculate the l', r'
         // each 1 unit we add in A will inc l' by one so we have two cases:
-        // Case 1: l' < l, so add diff=l'-l to A
+        // Case 1: l' < l, so add diff=l-l' to A
         // Case 2: l' > l so add diff=(n-l')+l to A
         // Same applies for B
         int A = 1;
-        int lp = (A+lst-1)%n;
-        if (lp < l) A += lp-l;
+        int lp = (A+lst-1)%n + 1;
+        if (lp < l) A += l-lp;
         else A += (n-lp)+l;
-        lp = (A+lst-1)%n;
+        if (A > n) A = (A-1)%n + 1;
+        lp = (A+lst-1)%n + 1;
 
         int B = 1;
-        int rp = (B+lst-1)%n;
-        if (rp < r) B += rp-r;
+        int rp = (B+lst-1)%n + 1;
+        if (rp < r) B += r-rp;
         else B += (n-rp)+r;
-        rp = (R+lst-1)%n;
+        if (B > n) B = (B-1)%n + 1;
+        rp = (B+lst-1)%n + 1;
 
         assert(l <= r);
-        assert(l == lp && r == rp)
+        assert(A >= 1 && A <= n && B >= 1 && B <= n);
+        assert(l == lp && r == rp);
         cout << A << " " << B << "\n";
 
         lst = mat[r].query(l, r);
