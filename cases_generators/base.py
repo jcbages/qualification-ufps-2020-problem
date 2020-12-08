@@ -20,9 +20,12 @@ for N, L in zip(SIZES, LEN):
         f.write('{}\n'.format('\n'.join(lines)))
 
         if Q != MAXQ:
+            queries = []
             for l in range(1, N+1):
                 for r in range(l, N+1):
-                    f.write('{} {}\n'.format(l, r))
+                    queries.append((l, r))
+            random.shuffle(queries)
+            for l, r in queries: f.write('{} {}\n'.format(l, r))
         else:
             queries = set([])
             for _ in range(Q):

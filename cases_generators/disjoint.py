@@ -22,6 +22,9 @@ for N in ALPHA:
         lines = list(map(lambda c : c*L, chars))
         f.write('{}\n'.format('\n'.join(lines)))
 
+        queries = []
         for l in range(1, N+1):
             for r in range(l, N+1):
-                f.write('{} {}\n'.format(l, r))
+                queries.append((l, r))
+        random.shuffle(queries)
+        for l, r in queries: f.write('{} {}\n'.format(l, r))
