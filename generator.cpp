@@ -9,10 +9,21 @@ typedef pair<int, int> pii;
 // define all bounds
 // (use small values for run_test cases and large for final cases)
 const char MINC = 'a', MAXC = 'z';
-const int MINN = 1, MAXN = 50;
-const int MINQ = 1, MAXQ = 10;
-const int MINS = 1, MAXS = 100;
-const int MINLR = 1;
+
+// SMALL SIZE SETTINGS
+// const int MINN = 1, MAXN = 50;
+// const int MINQ = 1, MAXQ = 10;
+// const int MINS = 1, MAXS = 100;
+
+// MEDIUM SIZE SETTINGS
+// const int MINN = 100, MAXN = 800;
+// const int MINQ = 1000, MAXQ = 100000;
+// const int MINS = 1, MAXS = 3300;
+
+// LARGE SIZE SETTINGS
+// const int MINN = 900, MAXN = 5000;
+// const int MINQ = 300000, MAXQ = 1000000;
+// const int MINS = 1, MAXS = 5000;
 
 int random_int(int l, int r) {
     int v = rand() % (r-l+1); // 0 <= v <= r-l
@@ -51,13 +62,16 @@ int main(int argc, char **argv) {
     cout << n << " " << q << "\n";
 
     // generate n strings
-    int total_len = 0;
+    int total_len = 0, avg_len = MAXS / n;
     for (int i = n; i > 0; --i) {
         int rem = MAXS - total_len - (i-1)*MINS;
         assert(rem >= MINS);
 
-        int len = random_int(MINS, rem);
-        assert(len >= 1 && len <= MAXS);
+        int len = random_int(
+            max(MINS, (int) (avg_len * 0.75)),
+            min(MAXS, (int) (avg_len * 1.25))
+        );
+        assert(len >= max(MINS, 1) && len <= MAXS);
 
         string s = random_string(len);
         cout << s << "\n";
