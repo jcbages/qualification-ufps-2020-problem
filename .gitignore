@@ -2,3 +2,5 @@ test/
 .DS_Store
 __pycache__
 cases_output/
+cases_generators/solution
+cases_generators/validator
