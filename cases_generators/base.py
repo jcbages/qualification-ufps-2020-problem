@@ -3,8 +3,8 @@ import random
 random.seed(987654321)
 
 PATH = '../cases'
-SIZES = [1, 2500, 5000]
-LEN = [1, 2, 1]
+SIZES = [1, 2500, 5000] + [1, 2, 3, 4, 5] + [70, 60, 50, 40, 30]
+LEN = [1, 2, 1] + [5000, 2500, 1666, 1250, 1000] + [70, 83, 100, 125, 166]
 MAXQ = 10 ** 6
 CHARS = list('abcdefghijklmnopqrstuvwxyz')
 
