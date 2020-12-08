@@ -68,8 +68,8 @@ int main(int argc, char **argv) {
         assert(rem >= MINS);
 
         int len = random_int(
-            max(MINS, (int) (avg_len * 0.75)),
-            min(MAXS, (int) (avg_len * 1.25))
+            max(MINS, min(rem, (int) (avg_len * 0.75))),
+            min(rem, (int) (avg_len * 1.25))
         );
         assert(len >= max(MINS, 1) && len <= MAXS);
 
