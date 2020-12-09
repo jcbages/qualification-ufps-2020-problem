@@ -5,9 +5,8 @@ typedef long long ll;
 const int LET = 26;
 
 struct node {
-    int lst;
     vector<int> edges;
-    node() { edges.assign(LET, -1); lst = 0; }
+    node() { edges.assign(LET, -1); }
 };
 
 int main() {
