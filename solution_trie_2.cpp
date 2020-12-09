@@ -23,7 +23,6 @@ int main() {
         trie.clear();
         trie.push_back(node());
         for (int r = l; r < n; ++r) {
-            if (r > l) mat[l][r] += mat[l][r-1];
             string &s = arr[r];
             for (int i = 0; i < s.size(); ++i) {
                 int curr = 0;
@@ -33,11 +32,11 @@ int main() {
                     if (p == -1) {
                         p = trie[curr].edges[c] = trie.size();
                         trie.push_back(node());
-                        ++mat[l][r];
                     }
                     curr = p;
                 }
             }
+            mat[l][r] = trie.size();
         }
     }
     int lst = 0;
