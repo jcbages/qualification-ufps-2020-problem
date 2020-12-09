@@ -33,7 +33,7 @@ The input starts with two values N (1 <= N <= 5000) and Q (1 <= Q <= 10^6) repre
 number of tasks that must be completed.
 
 Then you'll recieve N strings A_i that represent the elements of the array. You can assume that the sum of the length of
-all strings A_i is <= 5000 (i.e. sum(i=1,N,|A_i|) <= 5000).
+all strings A_i is <= 5000 (i.e. sum(i=1,N,|A_i|) <= 5000). Each string consists only of lowercase English letters (a-z).
 
 After this, you'll recieve Q lines, each one including two numbers A (1 <= A <= N) and B (1 <= B <= N) that represent
 each of the tasks that Manuel must complete.

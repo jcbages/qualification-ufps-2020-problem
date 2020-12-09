@@ -30,7 +30,8 @@ Input:
 La entrada inicia conn dos valores N (1 <= N <= 5000) y Q (1 <= Q <= 10^6) que representan el tamaño del arreglo A y el 
 numero de tareas a resolver respectivamente.
 
-Luego recibiras N strings A_i que representan los elementos del arreglo. La suma de las lonngitudes de todos los strings es <= 5000 (i.e. sum(i=1,N,|A_i|) <= 5000).
+Luego recibiras N strings A_i que representan los elementos del arreglo. La suma de las lonngitudes de todos los 
+strings es <= 5000 (i.e. sum(i=1,N,|A_i|) <= 5000). Cada string consiste unicamente de letras minusculas en Ingles (a-z).
 
 Despues de esto, recibiras Q lineas, cada una incluira dos numeros A (1 <= A <= N) y B (1 <= B <= N) que representan
 cada una de las tareas que Manuel debe completar.
