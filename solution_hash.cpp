@@ -3,7 +3,7 @@ using namespace std;
 typedef long long ll;
 
 const int MAX = 5002;
-const int MOD = 1e9+7, X = 137LL;
+const ll MOD[] = {(ll) (1e9+7), (ll) (1e9+9)}, X[] = {137LL, 139LL};
 
 struct BIT {
     vector<int> arr;
@@ -28,24 +28,24 @@ struct BIT {
     }
 };
 
-int add(int a, int b) {
+int add(int a, int b, int m) {
     ll ans = 1LL*a+b;
-    return ans >= MOD ? ans-MOD : ans;
+    return ans >= m ? ans-m : ans;
 }
 
-int mul(int a, int b) {
+int mul(int a, int b, int m) {
     ll ans = 1LL*a*b;
-    return ans >= MOD ? ans%MOD : ans;
+    return ans >= m ? ans%m : ans;
 }
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int n, q;
+    int n, q, h[] = {0, 0};
     string s;
     cin >> n >> q;
-    map<int, int> h_lst;
+    unordered_map<ll, int> h_lst;
     vector<BIT> mat(n+1);
     for (int k = 1; k <= n; ++k) {
         cin >> s;
@@ -56,13 +56,16 @@ int main() {
             }
         }
         for (int i = 0; i < s.size(); ++i) {
-            int h = 0;
+            h[0] = h[1] = 0;
             for (int j = i; j < s.size(); ++j) {
-                h = add(mul(h, X), s[j]);
-                if (h_lst.find(h) != h_lst.end()) {
-                    mat[k].update(h_lst[h], -1);
+                for (int k = 0; k < 2; ++k) {
+                    h[k] = add(mul(h[k], X[k], MOD[k]), s[j], MOD[k]);
                 }
-                h_lst[h] = k;
+                ll val = (1LL*h[0]<<32LL) + h[1];
+                if (h_lst.find(val) != h_lst.end()) {
+                    mat[k].update(h_lst[val], -1);
+                }
+                h_lst[val] = k;
                 mat[k].update(k, 1);
             }
         }
