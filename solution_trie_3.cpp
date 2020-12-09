@@ -15,32 +15,10 @@ int main() {
     string s;
     cin >> n >> q;
     vector<string> arr(n);
-    vector<vector<ll>> mat(n, vector<ll>(n, 0));
     for (auto &s : arr) cin >> s;
 
-    vector<node> trie;
-    for (int l = 0; l < n; ++l) {
-        trie.clear();
-        trie.push_back(node());
-        for (int r = l; r < n; ++r) {
-            if (r > l) mat[l][r] += mat[l][r-1];
-            string &s = arr[r];
-            for (int i = 0; i < s.size(); ++i) {
-                int curr = 0;
-                for (int j = i; j < s.size(); ++j) {
-                    int c = s[j]-'a';
-                    int p = trie[curr].edges[c];
-                    if (p == -1) {
-                        p = trie[curr].edges[c] = trie.size();
-                        trie.push_back(node());
-                        ++mat[l][r];
-                    }
-                    curr = p;
-                }
-            }
-        }
-    }
     int lst = 0;
+    vector<node> trie;
     while (q--) {
         int l, r;
         cin >> l >> r;
@@ -50,6 +28,24 @@ int main() {
         // r = (r+lst-1)%n+1;
         if (l > r) swap(l, r);
 
-        cout << (lst = mat[l-1][r-1]) << "\n";
+        trie.clear();
+        trie.push_back(node());
+        for (int p = l; p <= r; ++p) {
+            string &s = arr[p-1];
+            for (int i = 0; i < s.size(); ++i) {
+                int curr = 0;
+                for (int j = i; j < s.size(); ++j) {
+                    int c = s[j]-'a';
+                    int p = trie[curr].edges[c];
+                    if (p == -1) {
+                        p = trie[curr].edges[c] = trie.size();
+                        trie.push_back(node());
+                    }
+                    curr = p;
+                }
+            }
+        }
+
+        cout << (lst = trie.size()-1) << "\n";
     }
 }
