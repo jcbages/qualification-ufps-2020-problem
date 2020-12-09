@@ -36,7 +36,7 @@ int main() {
                     curr = p;
                 }
             }
-            mat[l][r] = trie.size();
+            mat[l][r] = trie.size()-1;
         }
     }
     int lst = 0;
