@@ -2,9 +2,12 @@
 using namespace std;
 typedef long long ll;
 
+const int LET = 26;
+
 struct node {
-    int edges[26];
-    node() { memset(edges, 255, sizeof(edges)); }
+    int lst;
+    vector<int> edges;
+    node() { edges.assign(LET, 26); lst = 0; }
 };
 
 int main() {

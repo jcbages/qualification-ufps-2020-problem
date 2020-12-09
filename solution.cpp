@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const int MAX = 5002;
+const int MAX = 5002, LET = 26;
 
 struct BIT {
     vector<int> arr;
@@ -27,8 +27,9 @@ struct BIT {
 };
 
 struct node {
-    int edges[26], lst;
-    node() { memset(edges, 255, sizeof(edges)); lst = 0; }
+    int lst;
+    vector<int> edges;
+    node() { edges.assign(LET, 26); lst = 0; }
 };
 
 int main() {
