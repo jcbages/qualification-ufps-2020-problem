@@ -29,7 +29,7 @@ struct BIT {
 struct node {
     int lst;
     vector<int> edges;
-    node() { edges.assign(LET, 26); lst = 0; }
+    node() { edges.assign(LET, -1); lst = 0; }
 };
 
 int main() {
